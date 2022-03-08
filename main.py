@@ -21,7 +21,6 @@ def data_formatter(item: Any, key: Any, value: Any) -> None:
         item[key] = f'eq("{value}")'
 
 
-
 def data_maker() -> dict:
     """Считывает массив c объектами из файла data.json, применяет форматирование по ключам и значениям к данным из файла,
     в завсисимости от структуры данных значения, значения могут являться вложенными структурами данных."""
@@ -33,7 +32,13 @@ def data_maker() -> dict:
                     data_formatter(item, key, value)
                 elif isinstance(value, dict):
                     for inner_key, inner_value in value.items():
-                        data_formatter(value, inner_key, inner_value)
+                        if isinstance(inner_value, dict):
+                            for nested_key, nested_value in inner_value.items():
+                                if isinstance(nested_value, dict):
+                                   for key, value in nested_value.items():
+                                       data_formatter(nested_value, key, value)
+                        else:   
+                            data_formatter(value, inner_key, inner_value)
                 elif isinstance(value, list):
                     if any(isinstance(elem, dict) for elem in value):
                         for el in value:
