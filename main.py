@@ -22,8 +22,8 @@ def formatter(item, key, value) -> None:
 
 
 def data_maker() -> dict:
-    """Считывает массив c объектами из файла data.json, применяет замену по ключам и значениям к данным из файла, 
-    значения могут являться вложенными структурами данных."""
+    """Считывает массив c объектами из файла data.json, применяет форматирование по ключам и значениям к данным из файла,
+    в завсисимости от структуры данных значения, значения могут являться вложенными структурами данных."""
     with open("data.json", 'r') as f:
         data = json.load(f)
         for item in data:
@@ -49,7 +49,7 @@ def data_maker() -> dict:
 
 
 def yaml_data_writer(data):
-    """Записывает переданный словарь и парсит в yaml"""
+    """Записывает переданный словарь в yaml формате в parsed_data.yaml"""
     with open('parsed_data.yml', 'w') as f2:
         yaml.dump(data, f2, encoding='UTF-8', allow_unicode=True, sort_keys=False)
 
