@@ -13,9 +13,9 @@ def data_formatter(item: Any, key: Any, value: Any) -> None:
         item[key] = 'empty()'
     elif key == 'created_at' or key == 'updated_at' or key == 'start_at' or key == 'expiration_at':
         item[key] = "date('RFC3339')"
-    elif value == 'False':
+    elif value == False:
         item[key] = 'eq(false)'
-    elif value == 'True':
+    elif value == True:
         item[key] = 'eq(true)'
     else:
         item[key] = f'eq("{value}")'
