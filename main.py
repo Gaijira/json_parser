@@ -4,14 +4,14 @@ import yaml
 
 
 def data_formatter(item: Any, key: Any, value: Any) -> None:
-    """Форматирует значения ключей в зависимости от типа данных, ключей и значений"""
-    if type(value) == int and key != 'id':
+    """Форматирует значения словаря в зависимости от типа данных, ключей и значений"""
+    if isinstance(value, int) and key != 'id':
         item[key] = "positive()"
-    elif key == 'id' or type(value) == float:
+    elif key == 'id' or isinstance(value, float):
         item[key] = f'eq({value})'
     elif value is None:
         item[key] = 'empty()'
-    elif key == 'created_at' or key == 'updated_at' or key == 'start_at' or key == 'expiration_at':
+    elif key == 'created_at' or key == 'updated_at' or key == 'start_at' or key == 'expiration_at' or key == 'published_at':
         item[key] = "date('RFC3339')"
     elif value == False:
         item[key] = 'eq(false)'
@@ -20,38 +20,29 @@ def data_formatter(item: Any, key: Any, value: Any) -> None:
     else:
         item[key] = f'eq("{value}")'
 
+def data_sorter(item, key, value) -> None:
+    """Общий метод сортировки для словарей и массивов"""
+    if not isinstance(value, dict) and not isinstance(value, list):
+        data_formatter(item, key, value)
+    elif isinstance(value, list) and len(value) == 0:
+        data_formatter(item, key, value)
+    elif isinstance(value, list) and not all(isinstance(el, dict) for el in value) and not all(isinstance(el, list) for el in value):
+        data_formatter(item, key, value)
+    else:
+        data_parser(value)
 
-def data_maker() -> dict:
-    """Считывает массив c объектами из файла data.json, применяет форматирование по ключам и значениям к данным из файла,
-    в завсисимости от структуры данных значения, значения могут являться вложенными структурами данных."""
-    with open("data.json", 'r') as f:
-        data = json.load(f)
+
+def data_parser(data) -> dict:
+    """Рекурсивно проходит по массиву со словарями, форматируя значения словаря в зависимости от типа данных"""
+    if isinstance(data, list):
         for item in data:
-            for key, value in item.items():
-                if not isinstance(value ,dict) and not isinstance(value, list):
-                    data_formatter(item, key, value)
-                elif isinstance(value, dict):
-                    for inner_key, inner_value in value.items():
-                        if isinstance(inner_value, dict):
-                            for nested_key, nested_value in inner_value.items():
-                                if isinstance(nested_value, dict):
-                                   for key, value in nested_value.items():
-                                       data_formatter(nested_value, key, value)
-                        else:   
-                            data_formatter(value, inner_key, inner_value)
-                elif isinstance(value, list):
-                    if any(isinstance(elem, dict) for elem in value):
-                        for el in value:
-                            if isinstance(el, dict):
-                                for inner_key, inner_value in el.items():
-                                    if not isinstance(inner_value, dict):
-                                        data_formatter(el, inner_key, inner_value)
-                                    elif isinstance(inner_value, dict):
-                                        for nested_key, nested_value in inner_value.items():
-                                            data_formatter(inner_value, nested_key, nested_value)
-                    elif all(not isinstance(elem, dict) for elem in value):
-                        data_formatter(item, key, value)
-    return data
+            if isinstance(item, dict):
+                for key, value in item.items():
+                    data_sorter(item, key, value)
+    else:
+        for key, value in data.items():
+            data_sorter(data, key, value)
+    return data               
 
 
 def yaml_data_writer(data: dict) -> None:
@@ -59,6 +50,12 @@ def yaml_data_writer(data: dict) -> None:
     with open('parsed_data.yml', 'w') as f2:
         yaml.dump(data, f2, encoding='UTF-8', allow_unicode=True, sort_keys=False)
 
+def data_loader() -> dict:
+    """Выгружает данные из файла data.json и возвращает из в формате словаря"""
+    with open("data.json", 'r') as f:
+        data = json.load(f)
+    return data
 
-data = data_maker()
+data = data_loader()
+data_parser(data)
 yaml_data_writer(data)
