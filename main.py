@@ -5,9 +5,9 @@ import yaml
 
 def data_formatter(item: Any, key: Any, value: Any) -> None:
     """Форматирует значения словаря в зависимости от типа данных, ключей и значений"""
-    if isinstance(value, int) and key != 'id':
+    if type(value) == int and key != 'id':
         item[key] = "positive()"
-    elif key == 'id' or isinstance(value, float):
+    elif key == 'id' or type(value) == float:
         item[key] = f'eq({value})'
     elif value is None:
         item[key] = 'empty()'
