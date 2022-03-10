@@ -20,7 +20,7 @@ def data_formatter(item: Any, key: Any, value: Any) -> None:
     else:
         item[key] = f'eq("{value}")'
 
-def data_sorter(item, key, value) -> None:
+def data_sorter(item: Any, key: Any, value: Any) -> None:
     """Общий метод сортировки для словарей и массивов"""
     if not isinstance(value, dict) and not isinstance(value, list):
         data_formatter(item, key, value)
@@ -32,7 +32,7 @@ def data_sorter(item, key, value) -> None:
         data_parser(value)
 
 
-def data_parser(data) -> dict:
+def data_parser(data: dict) -> dict:
     """Рекурсивно проходит по массиву со словарями, форматируя значения словаря в зависимости от типа данных"""
     if isinstance(data, list):
         for item in data:
