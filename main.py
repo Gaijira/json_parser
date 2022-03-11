@@ -17,8 +17,10 @@ def data_formatter(item: Any, key: Any, value: Any) -> None:
         item[key] = 'eq(false)'
     elif value == True:
         item[key] = 'eq(true)'
+    elif key == 'description' or key == 'announcement_description':
+        item[key] = "regex('(.)')"
     else:
-        item[key] = f'eq("{value}")'
+        item[key] = f"eq('{value}')"
 
 def data_sorter(item: Any, key: Any, value: Any) -> None:
     """Общий метод сортировки для словарей и массивов"""
