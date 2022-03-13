@@ -20,10 +20,10 @@ class TestDataHandler():
     def test_json_formatter(self, given, expected):
         assert self.data[0].get(given) == expected
 
-
     cases = [DataHandler, DataHandler.data_formatter, DataHandler.data_filter, DataHandler.data_parser]
-    expected = [True, True, True]
+    expected = [True, True, True, True]
 
+    
     @pytest.mark.parametrize('given, expected', list(zip(cases, expected)))
     def test_data_handler_callable(self, given, expected):
         assert callable(given) == expected

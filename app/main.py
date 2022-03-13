@@ -1,5 +1,5 @@
-from app.file_handler import FileHandler
-from app.data_handler import DataHandler
+from file_handler import FileHandler
+from data_handler import DataHandler
 
 
 data = FileHandler.json_data_loader()

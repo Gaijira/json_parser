@@ -38,3 +38,11 @@ class TestFileHandler():
         with open('app/parsed_data.yml', 'r') as f:
             self.data = yaml.safe_load(f)
         assert self.data == test_data
+
+    cases = [FileHandler, FileHandler.json_data_loader, FileHandler.yaml_data_writer]
+    expected = [True, True, True]
+
+    
+    @pytest.mark.parametrize('given, expected', list(zip(cases, expected)))
+    def test_data_handler_callable(self, given, expected):
+        assert callable(given) == expected
