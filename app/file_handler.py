@@ -4,8 +4,8 @@ import os
 import yaml
 
 
-class FileHandler():
-    
+class FileHandler:
+
     root_dir = os.path.dirname(os.path.abspath(__file__))
 
     def yaml_data_writer(self, data: dict) -> None:
