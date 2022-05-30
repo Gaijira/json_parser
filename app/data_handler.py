@@ -1,7 +1,7 @@
 from typing import Any
 
 
-class DataHandler():
+class DataHandler:
 
     def data_formatter(item: Any, key: Any, value: Any) -> None:
         """Форматирует значения словаря в зависимости от типа данных, ключей и значений"""
@@ -22,7 +22,6 @@ class DataHandler():
         else:
             item[key] = f"eq('{value}')"
 
-
     @classmethod
     def data_filter(cls, item: Any, key: Any, value: Any) -> None:
         """Общий метод сортировки для словарей и массивов"""
@@ -35,7 +34,6 @@ class DataHandler():
         else:
             cls.data_parser(value)
 
-
     @classmethod
     def data_parser(cls, data: dict) -> dict:
         """Рекурсивно проходит по массиву со словарями, форматируя значения словаря в зависимости от типа данных"""
@@ -47,4 +45,4 @@ class DataHandler():
         else:
             for key, value in data.items():
                 cls.data_filter(data, key, value)
-        return data    
+        return data
