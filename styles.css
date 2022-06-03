@@ -1,0 +1,51 @@
+#containers {
+    display:flex;
+    justify-content:center;
+}
+
+#json_block, #yaml_block {
+    width:35%
+}
+
+#json_container_title, #yaml_container_title {
+    margin-left: 30px;
+    margin-top: 5%;
+    font-size: x-large;
+}
+
+.json_container, .yaml_container {
+     border: 2px solid;
+     border-radius: 25px;
+     height: 900px;
+     color: black;
+     text-align: left;
+     padding: 20px;
+     outline: none;
+     width: 100%;
+}
+.convert_btn {
+     border: 2px solid;
+     border-radius: 25px;
+     float: left;
+     height: 100px;
+     width: 200px;
+     margin-top: 300px;
+     margin-left: 10px;
+     margin-right: 10px;
+     background-color:black;
+     color: white;
+     font-size: large;
+}
+
+.convert_btn:hover {
+     border: 2px solid;
+     border-radius: 25px;
+     float: left;
+     height: 100px;
+     width: 200px;
+     margin-top: 300px;
+     background-color: white;
+     color: black;
+     font-size: large;
+
+}

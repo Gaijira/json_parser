@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>JSON Parser</title>
+    <py-env>
+        - pyyaml
+        - paths:
+            - app/main.py
+            - app/data_handler.py
+    </py-env>
+</head>
+<body>
+    <div id="containers">
+        <div id="json_block">
+            <div id="json_container_title">RAW JSON</div>
+            <textarea id="json_container" class="json_container"></textarea>
+        </div>
+        <button id="covert_btn" class="convert_btn">Convert</button>
+        <div id="yaml_block">
+            <div id="yaml_container_title">Parsed YAML</div>
+            <textarea id="yaml_container" class="yaml_container"></textarea>
+        </div>
+    </div>
+    <py-script src="./app/main.py"></py-script>
+</body>
+</html>

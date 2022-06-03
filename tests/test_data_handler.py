@@ -1,6 +1,5 @@
 import json
 from app.data_handler import DataHandler
-from app.file_handler import FileHandler
 from .test_data_json import test_data
 import pytest
 
@@ -9,7 +8,6 @@ class TestDataHandler:
 
     with open('app/data.json', 'w') as f:
         json.dump(test_data, f)
-    test_data = FileHandler().json_data_loader()
     data = DataHandler.data_parser(test_data)
 
     cases = test_data[0].keys()
