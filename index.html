@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <meta charset="UTF-8">
+    <title>JSON Parser</title>
+    <py-env>
+    - paths:
+      - ./app/main.py
+    </py-env>
+</head>
+<body>
+    <textarea id="json_container" class="json_container"
+         style="border: 2px solid;
+         border-radius:25px;
+         height: 1000px;
+         color: black;
+         width: 40%;
+         float: left;
+         text-align: left;
+         padding:20px;
+         outline: none;
+         margin: 50px 20px"></textarea>
+    <button id="covert_btn" class="convert_btn"
+            style="border: 2px solid;
+                border-radius: 25px;
+                width: 13%;
+                height: 100px;
+                margin-top: 200px"
+    >Button</button>
+    <div id="yaml_container" class="yaml_container"
+         style="border: 2px solid;
+          border-radius:25px;
+          height: 1000px; color:
+          black; width: 40%;
+          float: right;
+          padding:20px;
+          text-align: justify;
+          margin:45px 30px">YAML</div>
+    <py-script>
+    </py-script>
+</body>
+</html>
